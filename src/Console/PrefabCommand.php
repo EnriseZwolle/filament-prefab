@@ -645,35 +645,6 @@ class PrefabCommand extends Command
         );
     }
 
-    /**
-     * Enable a Filament module. This displays the module in the roles section where you can enable or disable the module for certain roles.
-     */
-//    protected function enableModule(string $module): void
-//    {
-//        $FilamentServiceProviderPath = app_path('Providers/AppServiceProvider.php');
-//
-//        if (strpos(file_get_contents($filamentServiceProviderPath), 'Liberiser::serving(function (ServingLiberiser $event) {') === false) {
-//            $this->addToExistingFile(
-//                $liberiserServiceProviderPath,
-//                'use Motivo\Liberiser\Events\ServingLiberiser;',
-//                'use Illuminate\Support\Facades\Gate;'
-//            );
-//            $this->addToExistingFile(
-//                $liberiserServiceProviderPath,
-//                '
-//        Liberiser::serving(function (ServingLiberiser $event) {' . PHP_EOL .
-//                '        });',
-//                "Liberiser::resourcesIn(app_path('Liberiser'));"
-//            );
-//        }
-//
-//        $this->addToExistingFile(
-//            $liberiserServiceProviderPath,
-//            "            Liberiser::enableModule('{$module}', '" . Str::studly($module) . "');",
-//            'Liberiser::serving(function (ServingLiberiser $event) {'
-//        );
-//    }
-
     protected function mergeModuleCss($module): void
     {
         $moduleCssPath = __DIR__ . "/../../stubs/Modules/" . Str::studly($module) . "/resources/css/app.css";

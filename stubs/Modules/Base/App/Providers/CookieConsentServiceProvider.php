@@ -25,7 +25,7 @@ class CookieConsentServiceProvider extends ServiceProvider
         });
 
         Blade::directive('cookieConsentCss', function () {
-            $path = asset('vendor/liberiser/cookie-consent.css');
+            $path = asset('vendor/EnriseZwolle/filament-prefab/cookie-consent.css');
 
             return "<link rel='stylesheet' type='text/css' href='{$path}'>";
         });
