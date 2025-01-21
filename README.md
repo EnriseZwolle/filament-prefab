@@ -114,6 +114,21 @@ IconPicker::make('icon')
 2. Adding a new form can be done by creating a new form block, extending the `FormBlock` class
 3. Blocks can be registered in the `form` array in the `blocks.php` config file.
 
+### How to use input components
+1. Input components can be used to simply add a styled input to the front-end
+2. These components have some required fields that need to be sent alongside the component:
+   1. name (the name of the input)
+   2. title (the title that the label will use)
+   3. errors (just the $errors from the parent can be sent here)
+3. Some components require other information like options. These options are expected to be formatted as [label => value]
+4. Below is a list of all components:
+   1. checkbox
+   2. radio
+   3. select
+   4. submit
+   5. text
+   6. textarea
+
 ### Front-end
 1. visit `/blog` for a blog overview
 2. visit `/blog/{blog:slug}` for the show page of a blog
