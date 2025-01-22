@@ -1180,7 +1180,7 @@ AFTER;
                 $add = <<< 'ADD'
         $this->call([
         
-        ]);
+        ]);//end
 ADD;
                 $this->addToExistingFile(
                     $targetFile,
@@ -1192,9 +1192,7 @@ ADD;
 
             if ($seederType) {
                 $targetFile = database_path(sprintf('seeders/%sSeeder.php', $seederType));
-            }
 
-            if ($seederType) {
                 $this->addToExistingFile(
                     $targetFile,
                     sprintf('use Database\Seeders\%s\%s;', $seederType, $seederClassName),
@@ -1205,7 +1203,8 @@ ADD;
             $this->addToExistingFile(
                 $targetFile,
                 "            {$seederClassName}::class,",
-                '$this->call([',
+                ']);//end',
+                'before'
             );
         }
     }
