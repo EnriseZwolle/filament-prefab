@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Traits;
 
+use App\Actions\MapBlocksToSearchable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Laravel\Scout\Searchable as ScoutSearchable;
 use App\Contracts\IsSearchable;
 
@@ -65,6 +67,10 @@ trait Searchable
                 ->scopes($item->$relation()->getModel()::$frontendScopes ?? [])
                 ->get();
 
+            if ($item->$relation() instanceof MorphOne && $relationValue instanceof Collection) {
+                $relationValue = $relationValue->first();
+            }
+
             if ($relationValue instanceof Model) {
                 $relationsArray[$relation] = $this->mapSearchableArray($relationValue, $relationConfig);
             } elseif ($relationValue instanceof Collection) {
@@ -72,6 +78,14 @@ trait Searchable
                 foreach ($relationValue as $key => $nestedModel) {
                     $relationsArray[$relation][$key] = $this->mapSearchableArray($nestedModel, $relationConfig);
                 }
+            }
+        }
+
+        $fieldData = collect($item->attributesToArray())->only($fields);
+
+        foreach ($this->blockModuleFields() as $blockModuleField) {
+            if ($fieldData->has($blockModuleField) && ! empty($fieldData->get($blockModuleField))) {
+                $fieldData[$blockModuleField] = app(MapBlocksToSearchable::class)->handle($fieldData->get($blockModuleField));
             }
         }
 
