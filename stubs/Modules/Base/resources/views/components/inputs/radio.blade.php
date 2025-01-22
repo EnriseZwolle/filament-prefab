@@ -15,6 +15,7 @@
                        id="{{ ($loop->index == 0 ? $name : $name . '-' . $value) }}"
                        value="{{ $value }}"
                        @if($required) required @endif
+                       {{ old($name) == $value ? "checked":"" }}
                 />
 
                 <label for="{{ ($loop->index == 0 ? $name : $name . '-' . $value) }}"> {{ $label }}</label>

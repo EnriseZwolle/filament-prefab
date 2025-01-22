@@ -13,9 +13,9 @@
             class="rounded-2xl w-full"
             @if($required) required @endif
     >
-        <option value selected id="{{ $name }}">{{ __('Select an option') }}</option>
+        <option value {{ old($name) == null ? "selected":"" }} id="{{ $name }}">{{ __('Select an option') }}</option>
         @foreach($options as $label => $value)
-            <option value="{{ $value }}">{{ $label }}</option>
+            <option value="{{ $value }}" {{ old($name) == $value ? "selected":"" }}>{{ $label }}</option>
         @endforeach
     </select>
 

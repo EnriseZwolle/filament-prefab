@@ -13,6 +13,7 @@
            name="{{ $name }}"
            id="{{ $name }}"
            @if($required) required @endif
+           value="{{ old($name) }}"
     >
 
     <x-inputs.errors-field :name="$name"/>

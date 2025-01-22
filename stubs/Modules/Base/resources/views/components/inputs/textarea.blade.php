@@ -12,7 +12,7 @@
         name="{{ $name }}"
         id="{{ $name }}"
         @if($required) required @endif
-    ></textarea>
+    >{{ old($name) }}</textarea>
 
     <x-inputs.errors-field :name="$name"/>
 </div>
