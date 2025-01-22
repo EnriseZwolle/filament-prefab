@@ -3,7 +3,6 @@
     'options',
     'title',
     'required' => false,
-    'errors'
 ])
 
 <div {{ $attributes }}>
@@ -20,5 +19,5 @@
         @endforeach
     </select>
 
-    <x-inputs.errors-field :errors="$errors" :name="$name"/>
+    <x-inputs.errors-field :name="$name"/>
 </div>

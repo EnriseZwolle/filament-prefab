@@ -2,7 +2,6 @@
     'name',
     'title',
     'required' => false,
-    'errors'
 ])
 
 <div {{ $attributes }}>
@@ -15,5 +14,5 @@
         @if($required) required @endif
     ></textarea>
 
-    <x-inputs.errors-field :errors="$errors" :name="$name"/>
+    <x-inputs.errors-field :name="$name"/>
 </div>

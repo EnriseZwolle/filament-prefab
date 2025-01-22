@@ -1,12 +1,7 @@
 @props([
-    'name',
-    'errors'
+    'name'
 ])
 
-@if($errors->has($name))
-    @foreach($errors->get($name) as $error)
-        <div class="text-red-500 text-sm">
-            {{ $error }}
-        </div>
-    @endforeach
-@endif
+@error($name)
+    <div class="text-sm text-red-500">{{ $message }}</div>
+@enderror

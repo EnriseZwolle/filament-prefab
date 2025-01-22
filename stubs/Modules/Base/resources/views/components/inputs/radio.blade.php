@@ -2,7 +2,6 @@
     'name',
     'options',
     'title',
-    'errors',
     'required' => false
 ])
 
@@ -23,5 +22,5 @@
         @endforeach
     </fieldset>
 
-    <x-inputs.errors-field :errors="$errors" :name="$name"/>
+    <x-inputs.errors-field :name="$name"/>
 </div>

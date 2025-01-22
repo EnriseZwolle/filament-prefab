@@ -2,7 +2,6 @@
     'name',
     'title',
     'required' => false,
-    'errors',
     'type' => 'text'
 ])
 
@@ -16,5 +15,5 @@
            @if($required) required @endif
     >
 
-    <x-inputs.errors-field :errors="$errors" :name="$name"/>
+    <x-inputs.errors-field :name="$name"/>
 </div>
