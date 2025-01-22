@@ -329,6 +329,9 @@ class PrefabCommand extends Command
         // Resources...
         $this->copyDirectory(__DIR__ . "/../../stubs/Modules/" . Str::studly($module) . "/resources/css", resource_path('css'));
 
+        // Resources...
+        $this->copyDirectory(__DIR__ . "/../../stubs/Modules/" . Str::studly($module) . "/resources/images", resource_path('images'));
+
         // Config...
         $this->copyDirectory(__DIR__ . "/../../stubs/Modules/" . Str::studly($module) . "/config", config_path());
 
