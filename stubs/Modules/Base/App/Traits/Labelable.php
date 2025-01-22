@@ -29,7 +29,8 @@ trait Labelable
                     condition: fn (?array $state): bool => filled($state['label']),
                 )
                 ->schema([
-                    Forms\Components\TextInput::make('label'),
+                    Forms\Components\TextInput::make('label')
+                        ->disabled(),
                 ])
                 ->columns(1);
     }
