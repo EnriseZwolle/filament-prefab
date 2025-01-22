@@ -6,18 +6,18 @@
 ])
 
 <div {{ $attributes }}>
-    <label for="{{ $name }}" class="text-lg font-bold">{{ $title }}</label>
-
     <fieldset>
+        <legend class="text-lg font-bold">{{ $title }}</legend>
         @foreach($options as $label => $value)
-            <legend class="inline-block">
+            <div>
                 <input type="checkbox"
                        name="{{ $name }}"
                        id="{{ ($loop->index == 0 ? $name : $name . '-' . $value) }}"
-                       value="{{ $value }}"/>
+                       value="{{ $value }}"
+                />
 
                 <label for="{{ ($loop->index == 0 ? $name : $name . '-' . $value) }}"> {{ $label }}</label>
-            </legend>
+            </div>
         @endforeach
     </fieldset>
 

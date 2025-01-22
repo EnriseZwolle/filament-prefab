@@ -7,11 +7,10 @@
 ])
 
 <div {{ $attributes }}>
-    <label for="{{ $name }}" class="text-lg font-bold">{{ $title }}@if($required)*@endif</label>
-
     <fieldset>
+        <legend class="text-lg font-bold">{{ $title }}@if($required)*@endif</legend>
         @foreach($options as $label => $value)
-            <legend class="inline-block">
+            <div>
                 <input type="radio"
                        name="{{ $name }}"
                        id="{{ ($loop->index == 0 ? $name : $name . '-' . $value) }}"
@@ -20,7 +19,7 @@
                 />
 
                 <label for="{{ ($loop->index == 0 ? $name : $name . '-' . $value) }}"> {{ $label }}</label>
-            </legend>
+            </div>
         @endforeach
     </fieldset>
 
