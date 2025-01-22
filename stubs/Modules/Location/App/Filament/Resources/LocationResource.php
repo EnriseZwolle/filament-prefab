@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Contracts\Menuable;
 use App\Filament\Plugins\BlockModule;
 use App\Filament\Resources\LocationResource\Pages;
 use App\Filament\Resources\LocationResource\RelationManagers;
@@ -16,7 +17,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class LocationResource extends Resource
+class LocationResource extends Resource implements Menuable
 {
     protected static ?string $model = Location::class;
 
@@ -37,6 +38,21 @@ class LocationResource extends Resource
     public static function getPluralLabel(): ?string
     {
         return __('Locations');
+    }
+
+    public static function getMenuOptions(): array
+    {
+        return self::query()->pluck('name', 'id')->toArray();
+    }
+
+    public static function getResourceName(): string
+    {
+        return __('Location');
+    }
+
+    public function getRoute(): string
+    {
+        return route('location.show', ['location' => $this]);
     }
 
     public static function form(Form $form): Form

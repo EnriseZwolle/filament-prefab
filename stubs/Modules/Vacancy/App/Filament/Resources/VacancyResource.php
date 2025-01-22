@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Contracts\Menuable;
 use App\Filament\Plugins\BlockModule;
 use App\Filament\Resources\VacancyResource\Pages;
 use App\Filament\Resources\VacancyResource\RelationManagers;
@@ -13,7 +14,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 
-class VacancyResource extends Resource
+class VacancyResource extends Resource implements Menuable
 {
     protected static ?string $model = Vacancy::class;
 
@@ -34,6 +35,21 @@ class VacancyResource extends Resource
     public static function getPluralLabel(): ?string
     {
         return __('Vacancies');
+    }
+
+    public static function getMenuOptions(): array
+    {
+        return self::query()->pluck('name', 'id')->toArray();
+    }
+
+    public static function getResourceName(): string
+    {
+        return __('Vacancy');
+    }
+
+    public function getRoute(): string
+    {
+        return route('vacancy.show', ['vacancy' => $this]);
     }
 
     public static function form(Form $form): Form
