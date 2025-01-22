@@ -12,8 +12,6 @@ use App\Models\Page;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Seeder;
 
-use function Database\Seeders\__;
-
 class JobAlertMenuSeeder extends Seeder
 {
     /**
@@ -24,7 +22,7 @@ class JobAlertMenuSeeder extends Seeder
     public function run(): void
     {
         /** @var Menu $menu */
-        $menu = Label::getModel(MenuEnum::TOP);
+        $menu = Label::getModel(MenuEnum::TOP->value);
 
         /** @var Page $jobAlertOverview */
         $jobAlertOverview = Label::getModel('job-alert-overview');
