@@ -1,11 +1,10 @@
 <?php
 
-namespace EnriseZwolle\FilamentPrefabStubs\Modules\Base\App\Console\Commands;
+namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use Spatie\Sitemap\SitemapIndex;
-use function App\Console\Commands\public_path;
 
 class GenerateSitemap extends Command
 {
