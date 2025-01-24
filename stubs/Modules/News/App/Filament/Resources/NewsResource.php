@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources;
 
-use App\Contracts\Menuable;
 use App\Filament\Plugins\BlockModule;
 use App\Filament\Resources\NewsResource\Pages;
 use App\Models\NewsItem;
@@ -14,7 +13,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 
-class NewsResource extends Resource implements Menuable
+class NewsResource extends Resource
 {
     protected static ?string $model = NewsItem::class;
 
@@ -35,21 +34,6 @@ class NewsResource extends Resource implements Menuable
     public static function getPluralLabel(): ?string
     {
         return __('News');
-    }
-
-    public static function getMenuOptions(): array
-    {
-        return self::query()->pluck('name', 'id')->toArray();
-    }
-
-    public static function getResourceName(): string
-    {
-        return __('News');
-    }
-
-    public function getRoute(): string
-    {
-        return route('news.show', ['news' => $this]);
     }
 
     public static function form(Form $form): Form
