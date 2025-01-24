@@ -36,6 +36,21 @@ class ServiceResource extends Resource
         return __('Services');
     }
 
+    public static function getMenuOptions(): array
+    {
+        return self::query()->pluck('name', 'id')->toArray();
+    }
+
+    public static function getResourceName(): string
+    {
+        return __('Service');
+    }
+
+    public function getRoute(): string
+    {
+        return route('service.show', ['service' => $this]);
+    }
+
     public static function form(Form $form): Form
     {
         return $form

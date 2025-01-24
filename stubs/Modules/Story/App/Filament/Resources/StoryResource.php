@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Contracts\Menuable;
 use App\Filament\Plugins\BlockModule;
 use App\Filament\Resources\StoryResource\Pages;
 use App\Models\Story;
@@ -13,7 +14,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 
-class StoryResource extends Resource
+class StoryResource extends Resource implements Menuable
 {
     protected static ?string $model = Story::class;
 
@@ -34,6 +35,21 @@ class StoryResource extends Resource
     public static function getPluralLabel(): ?string
     {
         return __('Stories');
+    }
+
+    public static function getMenuOptions(): array
+    {
+        return self::query()->pluck('name', 'id')->toArray();
+    }
+
+    public static function getResourceName(): string
+    {
+        return __('Story');
+    }
+
+    public function getRoute(): string
+    {
+        return route('story.show', ['story' => $this]);
     }
 
     public static function form(Form $form): Form
@@ -161,7 +177,7 @@ class StoryResource extends Resource
                 ]),
             ]);
     }
-    
+
 
     public static function getRelations(): array
     {
