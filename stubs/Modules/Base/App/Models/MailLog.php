@@ -88,7 +88,13 @@ class MailLog extends Model
      */
     public function getAttribute($key): mixed
     {
-        return $this->$key;
+        $value = parent::getAttribute($key);
+
+        if (config('mail.log.encrypted') === true && in_array($key, $this->encryptable)) {
+            $value = Crypt::decrypt($value);
+        }
+
+        return $value;
     }
 
     /** @return Message|null */
@@ -166,7 +172,11 @@ class MailLog extends Model
      */
     public function setAttribute($key, $value): self
     {
-        return $this->$key = $value;
+        if (config('mail.log.encrypted') === true && in_array($key, $this->encryptable)) {
+            $value = Crypt::encrypt($value);
+        }
+
+        return parent::setAttribute($key, $value);
     }
 
     public function getDisplayNameAttribute(): string
