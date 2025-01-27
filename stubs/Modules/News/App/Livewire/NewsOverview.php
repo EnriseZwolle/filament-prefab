@@ -7,6 +7,7 @@ namespace App\Livewire;
 use App\Models\Label;
 use App\Models\Page;
 use App\Models\NewsItem;
+use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
@@ -27,7 +28,7 @@ class NewsOverview extends Component
         $this->newsItems = $this->getNewsItems();
     }
 
-    protected function getNewsItems()
+    protected function getNewsItems(): LengthAwarePaginator
     {
         return NewsItem::query()
             ->visible()
@@ -36,7 +37,7 @@ class NewsOverview extends Component
             ->paginate(self::AMOUNT_PER_PAGE);
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.news-overview', [
             'newsItems' => $this->getNewsItems()

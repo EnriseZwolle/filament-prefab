@@ -7,6 +7,7 @@ namespace App\Livewire;
 use App\Models\Label;
 use App\Models\Page;
 use App\Models\Blog;
+use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
@@ -26,7 +27,7 @@ class BlogOverview extends Component
         $this->blogOverviewPage = Label::getModel('blog-overview');
     }
 
-    protected function getBlogs()
+    protected function getBlogs(): LengthAwarePaginator
     {
         return Blog::query()
             ->visible()
@@ -35,7 +36,7 @@ class BlogOverview extends Component
             ->paginate(self::AMOUNT_PER_PAGE);
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.blog-overview', [
             'blogs' => $this->getBlogs()
