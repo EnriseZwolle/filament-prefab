@@ -236,12 +236,12 @@ class VacancySearch extends Component
             ->paginate(10);
     }
 
-    public function paginationView()
+    public function paginationView(): string
     {
         return 'components.pagination.simple';
     }
 
-    public function paginationSimpleView()
+    public function paginationSimpleView(): string
     {
         return 'components.pagination.simple';
     }
