@@ -593,10 +593,6 @@ class PrefabCommand extends Command
             }
         }
 
-        if (!empty($moduleSettings['enable'])) {
-            $this->enableModule($module);
-        }
-
         if (! empty($moduleSettings['searchable'])) {
             $this->addSearchable($moduleSettings['searchable']);
         }
