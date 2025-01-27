@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\View\Components\Content;
 
-use App\Models\Label;
 use App\Models\NewsItem;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\View\Component;
@@ -22,9 +21,6 @@ class NewsOverview extends Component
             ->published()
             ->latest()
             ->paginate(self::AMOUNT_PER_PAGE);
-        $newsPage = Label::getModel('news-overview');
-
-        $this->newsItems->setPath(route('news.index', ['model' => $newsPage]));
     }
 
     public function render(): View

@@ -8,12 +8,6 @@ use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
-    public function index()
-    {
-        $page = Label::getModel('blog-overview');
-        return view('resources.page.blog-overview', ['model' => $page]);
-    }
-
     public function show(Blog $blog)
     {
         abort_if(! $blog->isVisible() || ! $blog->isPublished(), 404);

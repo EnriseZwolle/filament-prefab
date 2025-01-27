@@ -9,12 +9,6 @@ use App\Models\Location;
 
 class LocationController extends Controller
 {
-    public function index()
-    {
-        $page = Label::getModel('location-overview');
-        return view('resources.page.location-overview', ['model' => $page]);
-    }
-
     public function show(Location $location)
     {
         abort_if(! $location->isVisible(), 404);

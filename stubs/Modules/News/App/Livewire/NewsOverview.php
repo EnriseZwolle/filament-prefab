@@ -29,34 +29,15 @@ class NewsOverview extends Component
 
     protected function getNewsItems()
     {
-        $newsItems = NewsItem::query()
+        return NewsItem::query()
             ->visible()
             ->published()
             ->latest()
-            ->paginate(self::AMOUNT_PER_PAGE)
-            ->setPath(route('news.index'));
-
-        return $newsItems;
-    }
-
-    protected function setPath(): void
-    {
-        request()->server->set('REQUEST_URI', $this->newsOverviewPage->slug);
-        request()->initialize(
-            request()->query->all(),
-            request()->request->all(),
-            request()->attributes->all(),
-            request()->cookies->all(),
-            request()->files->all(),
-            request()->server->all(),
-            request()->getContent(),
-        );
+            ->paginate(self::AMOUNT_PER_PAGE);
     }
 
     public function render()
     {
-        $this->setPath();
-
         return view('livewire.news-overview', [
             'newsItems' => $this->getNewsItems()
         ]);

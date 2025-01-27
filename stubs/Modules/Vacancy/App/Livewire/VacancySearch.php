@@ -232,8 +232,7 @@ class VacancySearch extends Component
                 'educations',
                 'location',
             ])
-            ->paginate(10)
-            ->setPath('/vacatures');
+            ->paginate(10);
     }
 
     public function paginationView()

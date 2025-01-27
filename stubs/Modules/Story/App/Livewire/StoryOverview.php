@@ -56,35 +56,16 @@ class StoryOverview extends Component
     {
         $storyCategories = array_keys($this->categories);
 
-        $stories = Story::query()
+        return Story::query()
             ->visible()
             ->published()
             ->when(count($storyCategories), fn(Builder $builder) => $builder->whereIn('story_category_id', $storyCategories))
             ->latest()
-            ->paginate(self::AMOUNT_PER_PAGE)
-            ->setPath(route('story.index', ['model' => $this->storyOverviewPage]));
-
-        return $stories;
-    }
-
-    protected function setPath(): void
-    {
-        request()->server->set('REQUEST_URI', $this->storyOverviewPage->slug);
-        request()->initialize(
-            request()->query->all(),
-            request()->request->all(),
-            request()->attributes->all(),
-            request()->cookies->all(),
-            request()->files->all(),
-            request()->server->all(),
-            request()->getContent(),
-        );
+            ->paginate(self::AMOUNT_PER_PAGE);
     }
 
     public function render()
     {
-        $this->setPath();
-
         return view('livewire.story-overview', [
             'stories' => $this->getStories()
         ]);

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\View\Components\Content;
 
-use App\Models\Label;
 use App\Models\Story;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\View\Component;
@@ -22,9 +21,6 @@ class StoryOverview extends Component
             ->published()
             ->latest()
             ->paginate(self::AMOUNT_PER_PAGE);
-        $storyPage = Label::getModel('story-overview');
-
-        $this->stories->setPath(route('story.index', ['model' => $storyPage]));
     }
 
     public function render(): View
