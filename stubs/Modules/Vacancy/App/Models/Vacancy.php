@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Contracts\IsSearchable;
+use App\Contracts\Menuable;
 use App\Traits\HasVisibility;
 use App\Traits\Publishable;
 use App\Traits\Seoable;
@@ -15,7 +16,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 
-class Vacancy extends Model implements IsSearchable
+class Vacancy extends Model implements IsSearchable, Menuable
 {
     use HasFactory;
     use Publishable;
@@ -143,6 +144,11 @@ class Vacancy extends Model implements IsSearchable
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public static function getMenuOptions(): array
+    {
+        return self::query()->pluck('name', 'id')->toArray();
     }
 
     public function getRoute(): string
