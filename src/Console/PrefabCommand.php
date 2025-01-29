@@ -1170,12 +1170,21 @@ ADD;
                 );
             }
 
-            $this->addToExistingFile(
-                $targetFile,
-                "            {$seederClassName}::class,",
-                ']);//end',
-                'before'
-            );
+            if(Str::contains($seederClassName, 'Page')) {
+                $this->addToExistingFile(
+                    $targetFile,
+                    "            {$seederClassName}::class,",
+                    '$this->call([',
+                    'after'
+                );
+            } else {
+                $this->addToExistingFile(
+                    $targetFile,
+                    "            {$seederClassName}::class,",
+                    ']);//end',
+                    'before'
+                );
+            }
         }
     }
 
