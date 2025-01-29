@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Contracts\IsSearchable;
+use App\Contracts\Menuable;
 use App\Traits\HasVisibility;
 use App\Traits\Searchable;
 use App\Traits\Seoable;
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Location extends Model implements IsSearchable
+class Location extends Model implements IsSearchable, Menuable
 {
     use HasFactory;
     use HasVisibility;
@@ -33,6 +34,11 @@ class Location extends Model implements IsSearchable
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public static function getMenuOptions(): array
+    {
+        return self::query()->pluck('name', 'id')->toArray();
     }
 
     public function getRoute(): string

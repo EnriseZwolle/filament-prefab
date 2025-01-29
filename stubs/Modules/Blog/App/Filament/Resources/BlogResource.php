@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources;
 
-use App\Contracts\Menuable;
 use App\Filament\Plugins\BlockModule;
 use App\Filament\Resources\BlogResource\Pages;
 use App\Models\Blog;
@@ -14,7 +13,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 
-class BlogResource extends Resource implements Menuable
+class BlogResource extends Resource
 {
     protected static ?string $model = Blog::class;
 
@@ -35,21 +34,6 @@ class BlogResource extends Resource implements Menuable
     public static function getPluralLabel(): ?string
     {
         return __('Blogs');
-    }
-
-    public static function getMenuOptions(): array
-    {
-        return self::query()->pluck('name', 'id')->toArray();
-    }
-
-    public static function getResourceName(): string
-    {
-        return __('Blog');
-    }
-
-    public function getRoute(): string
-    {
-        return route('blog.show', ['blog' => $this]);
     }
 
     public static function form(Form $form): Form

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Contracts\Menuable;
 use App\Traits\HasVisibility;
 use App\Traits\Publishable;
 use Carbon\Carbon;
@@ -15,7 +16,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class NewsItem extends Model implements IsSearchable
+class NewsItem extends Model implements IsSearchable, Menuable
 {
     use HasFactory;
     use Labelable;
@@ -48,13 +49,18 @@ class NewsItem extends Model implements IsSearchable
         return $this->name;
     }
 
-    public function getRoute(): string
+    public static function getMenuOptions(): array
     {
-        return route('news.show', ['newsItem' => $this]);
+        return self::query()->pluck('name', 'id')->toArray();
     }
 
     public static function getResourceName(): string
     {
         return __('News');
+    }
+
+    public function getRoute(): string
+    {
+        return route('news.show', ['newsItem' => $this]);
     }
 }

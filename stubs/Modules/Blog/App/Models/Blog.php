@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Contracts\Menuable;
 use App\Traits\Seoable;
 use App\Traits\Labelable;
 use App\Traits\Searchable;
@@ -13,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Blog extends Model implements IsSearchable
+class Blog extends Model implements IsSearchable, Menuable
 {
     use HasFactory;
     use Labelable;
@@ -44,6 +45,11 @@ class Blog extends Model implements IsSearchable
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public static function getMenuOptions(): array
+    {
+        return self::query()->pluck('name', 'id')->toArray();
     }
 
     public function getRoute(): string
