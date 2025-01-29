@@ -2,19 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Label;
 use App\Models\Blog;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
 
 class BlogController extends Controller
 {
-    public function index()
-    {
-        $page = Label::getModel('blog-overview');
-        return view('resources.page.blog-overview', ['model' => $page]);
-    }
-
-    public function show(Blog $blog)
+    public function show(Blog $blog): View
     {
         abort_if(! $blog->isVisible() || ! $blog->isPublished(), 404);
 

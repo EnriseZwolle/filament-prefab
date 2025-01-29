@@ -2,20 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Label;
 use App\Models\Location;
+use Illuminate\Contracts\View\View;
 
 
 class LocationController extends Controller
 {
-    public function index()
-    {
-        $page = Label::getModel('location-overview');
-        return view('resources.page.location-overview', ['model' => $page]);
-    }
-
-    public function show(Location $location)
+    public function show(Location $location): View
     {
         abort_if(! $location->isVisible(), 404);
 

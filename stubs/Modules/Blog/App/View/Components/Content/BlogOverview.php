@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\View\Components\Content;
 
-use App\Models\Label;
 use App\Models\Blog;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\View\Component;
@@ -22,9 +21,6 @@ class BlogOverview extends Component
             ->published()
             ->latest()
             ->paginate(self::AMOUNT_PER_PAGE);
-        $blogPage = Label::getModel('blog-overview');
-
-        $this->blogs->setPath(route('blog.index', ['model' => $blogPage]));
     }
 
     public function render(): View

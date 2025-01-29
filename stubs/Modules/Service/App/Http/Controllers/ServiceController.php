@@ -2,18 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Label;
 use App\Models\Service;
+use Illuminate\Contracts\View\View;
 
 class ServiceController extends Controller
 {
-    public function index()
-    {
-        $page = Label::getModel('service-overview');
-        return view('resources.page.service-overview', ['model' => $page]);
-    }
-
-    public function show(Service $service)
+    public function show(Service $service): View
     {
         abort_if(! $service->isVisible(), 404);
 

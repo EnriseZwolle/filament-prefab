@@ -2,19 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Label;
 use App\Models\NewsItem;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
+
 
 class NewsController extends Controller
 {
-    public function index()
-    {
-        $newsItem = Label::getModel('news-overview');
-        return view('resources.page.news-overview', ['model' => $newsItem]);
-    }
-
-    public function show(NewsItem $newsItem)
+    public function show(NewsItem $newsItem): View
     {
         abort_if(! $newsItem->isVisible() || ! $newsItem->isPublished(), 404);
 

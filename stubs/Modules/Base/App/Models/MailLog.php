@@ -25,17 +25,6 @@ class MailLog extends Model
      */
     protected $guarded = [];
 
-    /**
-     * The attributes that should be encrypted.
-     * Values are only encrypted when the config liberiser.mail.log.encrypted is set to `true`.
-     *
-     * @var array
-     */
-    protected $encryptable = [
-        'message',
-        'raw',
-    ];
-
     /** @var array */
     protected $casts = [
         'data' => 'object',
@@ -101,7 +90,7 @@ class MailLog extends Model
     {
         $value = parent::getAttribute($key);
 
-        if (config('liberiser.mail.log.encrypted') === true && in_array($key, $this->encryptable)) {
+        if (config('mail.log.encrypted') === true && in_array($key, $this->encryptable)) {
             $value = Crypt::decrypt($value);
         }
 
@@ -183,7 +172,7 @@ class MailLog extends Model
      */
     public function setAttribute($key, $value): self
     {
-        if (config('liberiser.mail.log.encrypted') === true && in_array($key, $this->encryptable)) {
+        if (config('mail.log.encrypted') === true && in_array($key, $this->encryptable)) {
             $value = Crypt::encrypt($value);
         }
 

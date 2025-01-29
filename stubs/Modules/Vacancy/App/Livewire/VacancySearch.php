@@ -6,6 +6,7 @@ use App\Models\Education;
 use App\Models\Location;
 use App\Models\Position;
 use App\Models\Vacancy;
+use Illuminate\Contracts\View\View;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
@@ -43,7 +44,7 @@ class VacancySearch extends Component
         $this->restoreFiltersFromSession();
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.vacancy-search');
     }
@@ -232,16 +233,15 @@ class VacancySearch extends Component
                 'educations',
                 'location',
             ])
-            ->paginate(10)
-            ->setPath('/vacatures');
+            ->paginate(10);
     }
 
-    public function paginationView()
+    public function paginationView(): string
     {
         return 'components.pagination.simple';
     }
 
-    public function paginationSimpleView()
+    public function paginationSimpleView(): string
     {
         return 'components.pagination.simple';
     }

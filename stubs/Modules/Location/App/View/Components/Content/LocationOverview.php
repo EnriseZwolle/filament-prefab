@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\View\Components\Content;
 
-use App\Models\Label;
 use App\Models\Location;
 use Illuminate\View\View;
 use Illuminate\View\Component;
@@ -21,10 +20,6 @@ class LocationOverview extends Component
         $this->locations = Location::visible()
             ->latest()
             ->paginate(self::AMOUNT_PER_PAGE);
-
-        $locationPage = Label::getModel('location-overview');
-
-        $this->locations->setPath(url($locationPage->slug));
     }
 
     public function render(): View

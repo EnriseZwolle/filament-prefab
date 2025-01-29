@@ -2,19 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Label;
 use App\Models\Story;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
 
 class StoryController extends Controller
 {
-    public function index()
-    {
-        $page = Label::getModel('story-overview');
-        return view('resources.page.story-overview', ['model' => $page]);
-    }
-
-    public function show(Story $story)
+    public function show(Story $story): View
     {
         abort_if(! $story->isVisible() || ! $story->isPublished(), 404);
 
